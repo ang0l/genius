@@ -10,7 +10,7 @@
 
 ?>
 
-<br>Начинается файл Footer
+<br>Начинается файл Footer<br>
 <?php wp_footer(); ?>
 
 </body>

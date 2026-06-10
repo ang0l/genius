@@ -105,6 +105,10 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 
 Не забыть сделать дамп БД.
 
+Документация WordPress:
+
+1. Документация по иерархии файлов - https://developer.wordpress.org/themes/basics/template-hierarchy/
+
 ### 15. Подключение файлов кода PHP
 
 За подключение файлов кода _PHP_ отвечает функция `get_template_part()`. Пропишу эту функцию в файле _header.php_ в самом начале `<body>`. Далее в корень темы добавлю папку _partials_ (части кода), в ней создам файлы _part.php_, _part-one.php_, _part-two.php_. Файлы с дефисом называются спецификацией. В этих файлах пропишу следующий код:
@@ -130,6 +134,10 @@ echo 'X';
 
 **Итог**: я научился в WordPress выводить части кода из ранее подготовленных файлов.
 
+Документация WordPress:
+
+1. Функция get_template_part() - https://developer.wordpress.org/reference/functions/get_template_part/
+
 ### 16. Подключение CSS стилей и JS скриптов
 
 В этом уроке буду учтиься подключать стили и скрипты специальными хуками и функциями. Так же познакомлюсь с понятием "хука".
@@ -149,9 +157,49 @@ echo 'X';
 
 В коре WordPress в файле _wp-config.php_ изменил `define( 'WP_DEBUG', false )` значение на `true` для того, чтобы выводились все ошибки для отладки.
 
-Документация разработчика:
+Документация WordPress:
 
 1. Подключение CSS стилей - https://developer.wordpress.org/reference/functions/wp_enqueue_style/
 2. Регистрация CSS стилей - https://developer.wordpress.org/reference/functions/wp_register_style/
 3. Подключение JS - https://developer.wordpress.org/reference/functions/wp_enqueue_script/
 4. Регистрация JS скриптов - https://developer.wordpress.org/reference/functions/wp_register_script/
+
+### 17. Хуки для Шапки и Подвала
+
+Хук для шапки - `wp_head()`, хук для подвала - `wp_footer()`. Для того, чтобы код выводился в шапке или в подвале необходимо функцию вывести через эти хуки.
+
+```
+function geinuscourse_meta_tag()
+{
+	echo '<meta name="author" content="Angol">';
+}
+add_action('wp_head', 'geinuscourse_meta_tag'); // Мета-тег выводится в <head>
+```
+
+```
+function geinuscourse_meta_tag()
+{
+	echo 'Привет Гениальный курс!<br>';
+}
+add_action('wp_body_open', 'geinuscourse_meta_tag'); // текст выводится в теле вначале <body>
+```
+
+В шапке (_header.php_):
+
+- `wp_head()` обязательно должен присутсвовать внутри тегов `<head></head>`. `wp_body_open` обязательно должен присутствовать вначале тела, т.е. после тега `<body>`.
+- `body_class()` обязательно должен присутствовать как параметр тега `<body>`: `<body <?php body_class() ?>>`. Здесь будут содержаться классы необходимые тегу `<body>`. Классы необходимо задавать как параметр хука, т.е. если нужен дополнительный класс, то он задается в параметре, а к нему уже будут выводится те классы, которые заложены в функции.
+- Также необходимо, для автоматической генерации языка сайта присутствие `language_attributes()` в теге `<html>` в виде параметра: `<html <?php language_attributes() ?>>`
+
+В подвале (_footer.php_):
+
+- `wp_footer()` обязательно присутствует.
+
+```
+function geinuscourse_meta_tag()
+{
+	echo 'Мои контакты<br>';
+}
+add_action('wp_footer', 'geinuscourse_meta_tag'); // текст выводится в конце контента перез закрывающимся тегом </body>
+```
+
+Хуки принимают третий параметр - это приоритет. Например подгрузка скриптов имеет приоритет `20` и если я поставлю в подвале приоритет `10` то внешне ничего не изменится, но в коде скрипры будут выводиться после текста. При приоритете более `20` текст выведится после скриптов.

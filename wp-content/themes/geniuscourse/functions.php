@@ -30,8 +30,29 @@ function geinuscourse_enqueue_scripts()
 }
 add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
 
+function geinuscourse_meta_tag()
+{
 
+	// echo '<meta name="author" content="Angol">';
+	// echo 'Привет Гениальный курс!<br>';
+	echo 'Мои контакты<br>';
+}
+// add_action('wp_head', 'geinuscourse_meta_tag'); // Мета-тег выводится в <head>
+// add_action('wp_body_open', 'geinuscourse_meta_tag'); // текст выводится в теле вначале <body>
+add_action('wp_footer', 'geinuscourse_meta_tag'); // текст выводится в конце контента перез закрывающимся тегом </body>
 
+function geniuscourse_body_class()
+{
+	$classes = [];
+	if (is_front_page()) {
+		$classes = ['main-class'];
+	} elseif (is_singular()) {
+		$classes = ['extra-class'];
+	}
+
+	return $classes;
+}
+add_filter('body_class', 'geniuscourse_body_class');
 
 
 

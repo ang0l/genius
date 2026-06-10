@@ -21,5 +21,5 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<?php wp_body_open(); ?>
 	Закончился файл Header <br>
+	<?php wp_body_open(); ?>
