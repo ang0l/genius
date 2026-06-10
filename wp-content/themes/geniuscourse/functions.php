@@ -1,4 +1,5 @@
 <?php
+
 /**
  * geniuscourse functions and definitions
  *
@@ -7,9 +8,42 @@
  * @package geniuscourse
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+/// Отсюда буду писать свой код
+
+/**
+ * Подключение стилей и скриптов
+ */
+function geinuscourse_enqueue_scripts()
+{
+	/// подключаю стили: параметры:
+	/// 1 - тема, 2 - путь к файлу стилей, 3 - дополнительные параметры, 4 - версия, 5 - медиа (для всех)
+	wp_enqueue_style('geniuscourse', get_template_directory_uri() . '/assets/css/general.css', [], '1.0.0.0', 'all');
+
+	/// подключаю скрипты: параметры:
+	/// 1 - тема, 2 - путь к файлу скриптов, 3 - дополнительные параметры (необходимость подгрузить jquery), 4 - версия, 5 - место подключения: true - подвал, false - шапка.
+	wp_enqueue_script('geniuscourse', get_template_directory_uri() . '/assets/js/script.js', ['jquery'], '1.0.0.0', true);
+
+	/// поключаю ответы на комментарий. переношу готовый код снизу из функции geniuscourse_scripts(), которую тоже удалил
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
+	}
+}
+add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
+
+
+
+
+
+
+
+
+
+/// ниже код болванки, я его со временем удалю
+
+
+if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define('_S_VERSION', '1.0.0');
 }
 
 /**
@@ -19,17 +53,18 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function geniuscourse_setup() {
+function geniuscourse_setup()
+{
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
 		* If you're building a theme based on geniuscourse, use a find and replace
 		* to change 'geniuscourse' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'geniuscourse', get_template_directory() . '/languages' );
+	load_theme_textdomain('geniuscourse', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+	add_theme_support('automatic-feed-links');
 
 	/*
 		* Let WordPress manage the document title.
@@ -37,19 +72,19 @@ function geniuscourse_setup() {
 		* hard-coded <title> tag in the document head, and expect WordPress to
 		* provide it for us.
 		*/
-	add_theme_support( 'title-tag' );
+	add_theme_support('title-tag');
 
 	/*
 		* Enable support for Post Thumbnails on posts and pages.
 		*
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support('post-thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'geniuscourse' ),
+			'menu-1' => esc_html__('Primary', 'geniuscourse'),
 		)
 	);
 
@@ -83,7 +118,7 @@ function geniuscourse_setup() {
 	);
 
 	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support('customize-selective-refresh-widgets');
 
 	/**
 	 * Add support for core custom logo.
@@ -100,7 +135,7 @@ function geniuscourse_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'geniuscourse_setup' );
+add_action('after_setup_theme', 'geniuscourse_setup');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,22 +144,24 @@ add_action( 'after_setup_theme', 'geniuscourse_setup' );
  *
  * @global int $content_width
  */
-function geniuscourse_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'geniuscourse_content_width', 640 );
+function geniuscourse_content_width()
+{
+	$GLOBALS['content_width'] = apply_filters('geniuscourse_content_width', 640);
 }
-add_action( 'after_setup_theme', 'geniuscourse_content_width', 0 );
+add_action('after_setup_theme', 'geniuscourse_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function geniuscourse_widgets_init() {
+function geniuscourse_widgets_init()
+{
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'geniuscourse' ),
+			'name'          => esc_html__('Sidebar', 'geniuscourse'),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'geniuscourse' ),
+			'description'   => esc_html__('Add widgets here.', 'geniuscourse'),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -132,22 +169,7 @@ function geniuscourse_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'geniuscourse_widgets_init' );
-
-/**
- * Enqueue scripts and styles.
- */
-function geniuscourse_scripts() {
-	wp_enqueue_style( 'geniuscourse-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'geniuscourse-style', 'rtl', 'replace' );
-
-	wp_enqueue_script( 'geniuscourse-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'geniuscourse_scripts' );
+add_action('widgets_init', 'geniuscourse_widgets_init');
 
 /**
  * Implement the Custom Header feature.
@@ -172,7 +194,6 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Load Jetpack compatibility file.
  */
-if ( defined( 'JETPACK__VERSION' ) ) {
+if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
-
