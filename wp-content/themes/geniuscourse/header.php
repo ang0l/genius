@@ -25,23 +25,20 @@
 	<?php wp_body_open(); ?>
 	<?php
 
-	// esc_attr() // используется для ескейпа атрибутов
-	// esc_html() // для ескейпа html-тегов
-	// esc_url() // для ссылок
-	// wp_kses() // имеет 2 парамтеро: тег и массив атрибутов для этого тега. пропускает только тот html, который я разрешаю
-	// wp_kses_post() // содержит все разрешенные для поста теги. похож на wp_kses(), но с 1 параметром
-	// wp_kses_data() // содержит все разрешенные для комментариев теги. похож на wp_kses(), но с 1 параметром
-	// esc_js() // для вставки js-кода, например в кнопку обработчик событий
-	// esc_textarea() // предназначен для текстового поля textarea
+	$hello = esc_html__('Hello', 'geniuscourse'); // возвращает результат перевода
+	$hello = esc_html_e('Hello', 'geniuscourse'); // выводит на экран результат перевода
 
-	// $name = 'Andrey Golovushkin "Angol"'; // пример для инпута
-	$name = 'Andrey Golovushkin <strong>Angol';
+	echo $hello . '<br>';
 
-	echo esc_html($name); // выводит на экран тег <strong> ввиде читаемого текста
+	$city = 'Krasnodar';
+	$country = 'Russia';
 
+	printf(esc_html__('My city %1$s and my country %2$s', 'geniuscourse'), $city, $country);
+
+	/// перевод во множественное число
+	$raiting = 4;
+
+	echo '<br>';
+	printf(esc_html(_n('%s star', '%s stars', $raiting, 'geniuscourse')), $raiting);
 
 	?>
-
-	<!--<input name="aethor" value="<?php /*= $name*/ ?>"> -->
-	<?php /* выводится только часть текста, т.к. двойные кавычки в нике закрывают значение параметра vslue */ ?>
-	<?php /*<input name="aethor" value="<?= esc_attr($name) ?>"> <?php /* d WordPress правильно так. Так будет выводиться вся строка */ ?>
