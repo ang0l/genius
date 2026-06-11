@@ -10,6 +10,12 @@
 
 ?>
 
+<?php
+wp_nav_menu([
+    'theme_location' => 'footer_nav',
+])
+?>
+
 <br>Начинается файл Footer<br>
 <?php wp_footer(); ?>
 

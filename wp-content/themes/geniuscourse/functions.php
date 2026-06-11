@@ -30,31 +30,18 @@ function geinuscourse_enqueue_scripts()
 }
 add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
 
-function geinuscourse_meta_tag()
+/**
+ * Регистрация меню
+ */
+function geniuscourse_registration_menus()
 {
 
-	// echo '<meta name="author" content="Angol">';
-	// echo 'Привет Гениальный курс!<br>';
-	echo 'Мои контакты<br>';
+	register_nav_menus([
+		'header_nav' => esc_html__('Header navigation', 'geniuscourse'),
+		'footer_nav' => esc_html__('Footer navigation', 'geniuscourse'),
+	]);
 }
-// add_action('wp_head', 'geinuscourse_meta_tag'); // Мета-тег выводится в <head>
-// add_action('wp_body_open', 'geinuscourse_meta_tag'); // текст выводится в теле вначале <body>
-add_action('wp_footer', 'geinuscourse_meta_tag'); // текст выводится в конце контента перез закрывающимся тегом </body>
-
-function geniuscourse_body_class()
-{
-	$classes = [];
-	if (is_front_page()) {
-		$classes = ['main-class'];
-	} elseif (is_singular()) {
-		$classes = ['extra-class'];
-	}
-
-	return $classes;
-}
-add_filter('body_class', 'geniuscourse_body_class');
-
-
+add_action('after_setup_theme', 'geniuscourse_registration_menus', 0);
 
 
 
@@ -102,12 +89,13 @@ function geniuscourse_setup()
 		*/
 	add_theme_support('post-thumbnails');
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus(
-		array(
-			'menu-1' => esc_html__('Primary', 'geniuscourse'),
-		)
-	);
+	/// < Angol. Удалил локацию меню Primary содзанную в болванке по умолчанию
+	// // This theme uses wp_nav_menu() in one location.
+	// register_nav_menus(
+	// 	array(
+	// 		'menu-1' => esc_html__('Primary', 'geniuscourse'),
+	// 	)
+	// );
 
 	/*
 		* Switch default core markup for search form, comment form, and comments
