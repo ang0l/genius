@@ -33,15 +33,55 @@ add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
 /**
  * Регистрация меню
  */
-function geniuscourse_registration_menus()
+function geniuscourse_theme_init()
 {
 
 	register_nav_menus([
 		'header_nav' => esc_html__('Header navigation', 'geniuscourse'),
 		'footer_nav' => esc_html__('Footer navigation', 'geniuscourse'),
 	]);
+
+	/**
+	 * Включает по поддержку HTML5 для форм, комментариев и пр.
+	 */
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		)
+	);
 }
-add_action('after_setup_theme', 'geniuscourse_registration_menus', 0);
+add_action('after_setup_theme', 'geniuscourse_theme_init', 0);
+
+function geniuscourse_custom_search()
+{
+
+	$form = '<form method="get" action="' . home_url("/") . '">
+    <input type="search" name="s" value="' . the_search_query() . '">
+    <input type="submit">
+	<input type="hidden" value="post" name="post_type"
+</form>';
+
+	return $form;
+}
+add_filter('get_search_form', 'geniuscourse_custom_search');
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,22 +137,6 @@ function geniuscourse_setup()
 	// 	)
 	// );
 
-	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
 
 	// Set up the WordPress core custom background feature.
 	add_theme_support(

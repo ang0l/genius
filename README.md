@@ -249,3 +249,48 @@ wp_nav_menu([
 
 1. Регистрация навигации - https://developer.wordpress.org/reference/functions/register_nav_menus/
 2. Вывод навигации во фронте - https://developer.wordpress.org/reference/functions/wp_nav_menu/
+
+### 19. Реализация формы поиска
+
+В _functions.php_ пенеименована функция `geniuscourse_registration_menus()` в `geniuscourse_theme_init()`. В нее добавлена реализация функции `add_theme_support()` для поддержки HTML5 в формах, комментариях и пр.
+
+Создан файл _searchform.php_ в каталоге темы с кодом:
+
+```
+<form method="get" action="<?= home_url('/') ?>">
+    <input type="search" name="s" value="<?php the_search_query() ?>">
+    <input type="submit">
+</form>
+```
+
+- в _action_ функция `home_url('/')` выводит на главную страницу;
+- в теге `<input>`:
+  - параметр `name="s"`, именно к `s` прикрепляется get-запрос;
+  - параметр в _value_ задается значение функции `the_search_query()`, эта функция выводит последний запрос и он сразу же помещается в поле ввода.
+
+Форма ищет запрос во всех разделах сайта. Чтобы поиск происходил в определенных разделах, например посты, статьи или комментарии, необходимо дописать скрытое поле:
+
+```
+<input type="hidden" value="post" name="post_type">
+```
+
+По этому коду поиск будет производиться только в постах.
+
+Кастомизировать форму поиска можно и из файла _functions.php_. Можно за ненадобностью удалить файл _searchform.php_ и в _functions.php_ добавить следующую функцию:
+
+```
+function geniuscourse_custom_search()
+{
+
+	$form = '<form method="get" action="<?= home_url("/") ?>">
+    <input type="search" name="s" value="<?php the_search_query() ?>">
+    <input type="submit">
+</form>';
+
+	return $form;
+}
+add_filter('get_search_form', 'geniuscourse_custom_search');
+
+```
+
+здесь важно то, чтобы у поля ввода поиска _name_ имел значение _s_. Но с этим моментом у меня будет хуже. Дело в том, что уроки старые (2022), а я их учу в 2026, версия WordPress по урокам 5.Х, а у меня 7.0. Возможно, что и у Underscores произошли какие-то изменения, т.к. еще и PHP более новый. В общем у меня не исчезают стили формы поиска по умолчанию болванки, как удалить эту фомру я пока не знаю, как изменить ее стили я пока не знаю. И при вставке формы в файл _functions.php_ эта форма должна быть заполнена (выводится сообщение "Вы пропустили это поле"). Думаю, что позднее разберусь с этим.
