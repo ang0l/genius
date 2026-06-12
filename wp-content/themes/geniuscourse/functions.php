@@ -61,6 +61,26 @@ function geniuscourse_theme_init()
 	 * Поддержка мультиязычности
 	 */
 	load_theme_textdomain('geniuscourse', get_template_directory() . '/lang');
+
+	/**
+	 * Поддержка thumbnails
+	 */
+	add_theme_support('post-thumbnails');
+
+	/**
+	 * Поддержка пост-формата
+	 */
+	add_theme_support('post-formats', [
+		'video',
+		'image',
+		'quote',
+		'gallery',
+	]);
+
+	/**
+	 * Применение форматов к пост тайпу
+	 */
+	add_post_type_support('Car', 'post-formats');
 }
 add_action('after_setup_theme', 'geniuscourse_theme_init', 0);
 
@@ -109,7 +129,7 @@ function geniuscourse_register_post_type()
 			'items_list'            => esc_html_x('Cars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'geniuscourse'),
 
 		],
-		'supports' => ['author', 'title', 'editor', 'thumbnail'], /// Блоки, которые должны присутствовать в пост тайпе
+		'supports' => ['author', 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'post-formats',], /// Блоки, которые должны присутствовать в пост тайпе
 		'public' => true, /// доступ к пост тайпу из фронт-части сайта
 		'publicly_queryable' => true, /// доступ из фронта при обращении по ссылке
 		'show_ui' => true, /// Включение интерфейса пост тайпа
@@ -118,11 +138,24 @@ function geniuscourse_register_post_type()
 		'show_in_admin_bar' => false, /// Включение/отсключение меню пост тайпа в админском меню (сверху)
 		'menu_position' => 100, /// Позиция размещения пост тайпа в навигации Админки
 		'menu_icon' => 'dashicons-car', /// иконка. стиль иконки выбирается по ссылке ниже
+		'rewrite' => ['slug' => 'cars'],
+		'show_in_rest' => true,
 	];
 
 	register_post_type('car', $args);
 }
 add_action('init', 'geniuscourse_register_post_type');
+
+function geniuscourse_rewrite_rules()
+{
+	geniuscourse_register_post_type();
+	flush_rewrite_rules();
+}
+
+
+
+
+
 
 
 

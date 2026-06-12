@@ -494,3 +494,46 @@ add_action('init', 'geniuscourse_register_post_type');
 
 1. Регистрация постайпа - https://developer.wordpress.org/reference/functions/register_post_type/
 2. Иконки - https://developer.wordpress.org/resource/dashicons/#cover-image
+
+### 25. Регистрация Post Type. #2
+
+Для того, чтобы работала _thumbnails_ необходимо, чтобы была включена поддержка _post_thumbnails_. Эта поддержка включена Underscores в файле _functions.php_. Перенес вызов функции в тело своей функции `geniuscourse_theme_init()`:
+
+```
+add_theme_support('post-thumbnails');
+```
+
+Там же добавил поддержку _post-formats_:
+
+```
+add_theme_support('post-formats', [
+	'video',
+	'image',
+	'quote',
+	'gallery',
+]);
+```
+
+Также добавил условие, чтобы пост тайп привязался к этим форматам:
+
+```
+add_post_type_support('Car', 'post-formats');
+```
+
+это удобно тем, что можно создавать различные форматы для различных пост тайпов. В Амдинке при добавлении или редактировании поста (элемента пост тайпа) появилась возможность выбирать формат.
+
+В аргументах (`$args`) для ЧПУ-ссылок нужно вставить параметр `rewrite` со значением `['slug' => 'cars']`. Теперь для перехода на страницу будет испольоваться домен `https://genius.loc/cars`.
+
+Для включения редактора _Gutenberg_ нужно включить параметр `['show_in_rest' => true]`. Чтобы редактор _Gutenberg_ работал необходимо в массив параметра `supports` добавить элемент `editor`.
+
+Чтобы не слетала работа ЧПУ-ссылок при обновлении темы нужно добавить в _functions.php_ функцию `function geniuscourse_rewrite_rules()`:
+
+```
+function geniuscourse_rewrite_rules()
+{
+	geniuscourse_register_post_type();
+	flush_rewrite_rules();
+}
+```
+
+Этот код нужно вставлять при регистрации пост тайпа, чтобы в дальнейшем не было проблем с ошибкой 404 при работе с новыми пост-тайпами.

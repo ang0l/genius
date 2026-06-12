@@ -1,0 +1,208 @@
+# Copyright (C) 2020 Automattic
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Geniuscourse 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/_s\n"
+"POT-Creation-Date: 2026-06-12 15:45+0300\n"
+"PO-Revision-Date: 2026-06-12 15:46+0300\n"
+"Last-Translator: \n"
+"Language-Team: Angol <ang0l@inbox.ru>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.9\n"
+"X-Domain: _s\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;esc_html_x;__;_e;_x;_n\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:17
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:21
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
+msgstr ""
+
+#: 404.php:30
+msgid "Most Used Categories"
+msgstr ""
+
+#: 404.php:48
+#, php-format
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: comments.php:35
+#, php-format
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:40
+msgid "Header navigation"
+msgstr ""
+
+#: functions.php:41
+msgid "Footer navigation"
+msgstr ""
+
+#: functions.php:84 functions.php:87 functions.php:89
+msgid "Car"
+msgstr ""
+
+#: functions.php:86 functions.php:88
+msgid "Cars"
+msgstr ""
+
+#: functions.php:90
+msgid "Add New"
+msgstr ""
+
+#: functions.php:91
+msgid "Add New Car"
+msgstr ""
+
+#: functions.php:92
+msgid "New Car"
+msgstr ""
+
+#: functions.php:93
+msgid "Edit Car"
+msgstr ""
+
+#: functions.php:94
+msgid "View Car"
+msgstr ""
+
+#: functions.php:95
+msgid "All Cars"
+msgstr ""
+
+#: functions.php:96
+msgid "Search Cars"
+msgstr ""
+
+#: functions.php:97
+msgid "Parent Cars:"
+msgstr ""
+
+#: functions.php:98
+msgid "No Cars found."
+msgstr ""
+
+#: functions.php:99
+msgid "No Cars found in Trash."
+msgstr ""
+
+#: functions.php:100
+msgid "Car Cover Image"
+msgstr ""
+
+#: functions.php:101
+msgid "Set cover image"
+msgstr ""
+
+#: functions.php:102
+msgid "Remove cover image"
+msgstr ""
+
+#: functions.php:103
+msgid "Use as cover image"
+msgstr ""
+
+#: functions.php:104
+msgid "Car archives"
+msgstr ""
+
+#: functions.php:105
+msgid "Insert into Car"
+msgstr ""
+
+#: functions.php:106
+msgid "Uploaded to this Car"
+msgstr ""
+
+#: functions.php:107
+msgid "Filter Cars list"
+msgstr ""
+
+#: functions.php:108
+msgid "Cars list navigation"
+msgstr ""
+
+#: functions.php:109
+msgid "Cars list"
+msgstr ""
+
+#: functions.php:238
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:240
+msgid "Add widgets here."
+msgstr ""
+
+#: inc/template-tags.php:30
+#, php-format
+msgid "Posted on %s"
+msgstr ""
+
+#: inc/template-tags.php:46
+#, php-format
+msgid "by %s"
+msgstr ""
+
+#: inc/template-tags.php:63 inc/template-tags.php:70
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:66
+#, php-format
+msgid "Posted in %1$s"
+msgstr ""
+
+#: inc/template-tags.php:73
+#, php-format
+msgid "Tagged %1$s"
+msgstr ""
+
+#: inc/template-tags.php:83
+#, php-format
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: inc/template-tags.php:100
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: partials/content-none.php:1
+msgid "No posts"
+msgstr ""
+
+#: partials/content.php:7
+msgid "Read more"
+msgstr "Подробнее"
+
+#: search.php:22
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: single.php:23
+msgid "Previous:"
+msgstr "Предыдущая:"
+
+#: single.php:24
+msgid "Next:"
+msgstr "Следующая:"
