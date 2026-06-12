@@ -60,7 +60,7 @@ function geniuscourse_theme_init()
 	/**
 	 * Поддержка мультиязычности
 	 */
-	load_theme_textdomain('geniuscourse', get_template_directory() . '/lang');
+	load_theme_textdomain('geniuscourse', get_template_directory() . '/languages');
 
 	/**
 	 * Поддержка thumbnails

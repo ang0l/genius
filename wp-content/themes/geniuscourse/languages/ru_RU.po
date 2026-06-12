@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Geniuscourse 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/_s\n"
 "POT-Creation-Date: 2026-06-12 15:45+0300\n"
-"PO-Revision-Date: 2026-06-12 15:46+0300\n"
+"PO-Revision-Date: 2026-06-12 20:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: Angol <ang0l@inbox.ru>\n"
 "Language: ru_RU\n"
@@ -58,11 +58,11 @@ msgstr ""
 
 #: functions.php:84 functions.php:87 functions.php:89
 msgid "Car"
-msgstr ""
+msgstr "Автомобиль"
 
 #: functions.php:86 functions.php:88
 msgid "Cars"
-msgstr ""
+msgstr "Автомобили"
 
 #: functions.php:90
 msgid "Add New"
@@ -70,11 +70,11 @@ msgstr ""
 
 #: functions.php:91
 msgid "Add New Car"
-msgstr ""
+msgstr "Добавить новый автомобиль"
 
 #: functions.php:92
 msgid "New Car"
-msgstr ""
+msgstr "Новый автомобиль"
 
 #: functions.php:93
 msgid "Edit Car"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: functions.php:95
 msgid "All Cars"
-msgstr ""
+msgstr "Все автомобили"
 
 #: functions.php:96
 msgid "Search Cars"
