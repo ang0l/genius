@@ -1,0 +1,1 @@
+<span><?= esc_html__('No posts', 'geniuscourse') ?></span>
