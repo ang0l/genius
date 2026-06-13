@@ -99,29 +99,32 @@ add_filter('get_search_form', 'geniuscourse_custom_search');
 
 function geniuscourse_register_post_type()
 {
-	$args = [
-		'hierarchical' => false, /// Древовидная структура. У меня термы по бренду не поддерживают древовидньсть, поэтому false.
-		'labels' => [ /// Все необходимое для перевода.
-			'name'              => esc_html_x('Brands', 'taxonomy general name', 'geniuscourse'),
-			'singular_name'     => esc_html_x('Brand', 'taxonomy singular name', 'geniuscourse'),
-			'search_items'      => esc_html__('Search Brands', 'geniuscourse'),
-			'all_items'         => esc_html__('All Brands', 'geniuscourse'),
-			'parent_item'       => esc_html__('Parent Brand', 'geniuscourse'),
-			'parent_item_colon' => esc_html__('Parent Brand:', 'geniuscourse'),
-			'edit_item'         => esc_html__('Edit Brand', 'geniuscourse'),
-			'update_item'       => esc_html__('Update Brand', 'geniuscourse'),
-			'add_new_item'      => esc_html__('Add New Brand', 'geniuscourse'),
-			'new_item_name'     => esc_html__('New Brand Name', 'geniuscourse'),
-			'menu_name'         => esc_html__('Brand', 'geniuscourse'),
-		],
-		'show_ui' => true, /// Включение интерфейса Таксономи
-		'rewrite' => ['slug' => 'brands'], /// слаг для Таксономи
-		'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=brands
-		'show_in_rest' => true, /// Включение редактора Gutenberg
-		'show_admin_column' => true, /// Включение колонки в список всех Термов
-	];
+	if (!taxonomy_exists('brand')) { /// если не существует Таксономи brand
+		$args = [
+			'hierarchical' => false, /// Древовидная структура. У меня термы по бренду не поддерживают древовидньсть, поэтому false.
+			'labels' => [ /// Все необходимое для перевода.
+				'name'              => esc_html_x('Brands', 'taxonomy general name', 'geniuscourse'),
+				'singular_name'     => esc_html_x('Brand', 'taxonomy singular name', 'geniuscourse'),
+				'search_items'      => esc_html__('Search Brands', 'geniuscourse'),
+				'all_items'         => esc_html__('All Brands', 'geniuscourse'),
+				'parent_item'       => esc_html__('Parent Brand', 'geniuscourse'),
+				'parent_item_colon' => esc_html__('Parent Brand:', 'geniuscourse'),
+				'edit_item'         => esc_html__('Edit Brand', 'geniuscourse'),
+				'update_item'       => esc_html__('Update Brand', 'geniuscourse'),
+				'add_new_item'      => esc_html__('Add New Brand', 'geniuscourse'),
+				'new_item_name'     => esc_html__('New Brand Name', 'geniuscourse'),
+				'menu_name'         => esc_html__('Brand', 'geniuscourse'),
+			],
+			'show_ui' => true, /// Включение интерфейса Таксономи
+			'rewrite' => ['slug' => 'brands'], /// слаг для Таксономи
+			'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=brands
+			'show_in_rest' => true, /// Включение редактора Gutenberg
+			'show_admin_column' => true, /// Включение колонки в список всех Термов
+		];
 
-	register_taxonomy('brend', ['car'], $args);
+		register_taxonomy('brand', ['car'], $args);
+	}
+
 	unset($args);
 
 	$args = [
