@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Geniuscourse 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/_s\n"
-"POT-Creation-Date: 2026-06-12 15:45+0300\n"
-"PO-Revision-Date: 2026-06-12 20:32+0300\n"
+"POT-Creation-Date: 2026-06-13 08:10+0300\n"
+"PO-Revision-Date: 2026-06-13 08:19+0300\n"
 "Last-Translator: \n"
 "Language-Team: Angol <ang0l@inbox.ru>\n"
 "Language: ru_RU\n"
@@ -56,99 +56,179 @@ msgstr ""
 msgid "Footer navigation"
 msgstr ""
 
-#: functions.php:84 functions.php:87 functions.php:89
-msgid "Car"
-msgstr "Автомобиль"
-
-#: functions.php:86 functions.php:88
-msgid "Cars"
-msgstr "Автомобили"
-
-#: functions.php:90
-msgid "Add New"
-msgstr ""
-
-#: functions.php:91
-msgid "Add New Car"
-msgstr "Добавить новый автомобиль"
-
-#: functions.php:92
-msgid "New Car"
-msgstr "Новый автомобиль"
-
-#: functions.php:93
-msgid "Edit Car"
-msgstr ""
-
-#: functions.php:94
-msgid "View Car"
-msgstr ""
-
-#: functions.php:95
-msgid "All Cars"
-msgstr "Все автомобили"
-
-#: functions.php:96
-msgid "Search Cars"
-msgstr ""
-
-#: functions.php:97
-msgid "Parent Cars:"
-msgstr ""
-
-#: functions.php:98
-msgid "No Cars found."
-msgstr ""
-
-#: functions.php:99
-msgid "No Cars found in Trash."
-msgstr ""
-
-#: functions.php:100
-msgid "Car Cover Image"
-msgstr ""
-
-#: functions.php:101
-msgid "Set cover image"
-msgstr ""
-
-#: functions.php:102
-msgid "Remove cover image"
-msgstr ""
-
-#: functions.php:103
-msgid "Use as cover image"
-msgstr ""
-
-#: functions.php:104
-msgid "Car archives"
-msgstr ""
-
 #: functions.php:105
-msgid "Insert into Car"
-msgstr ""
+msgid "Brands"
+msgstr "Брэнды"
 
-#: functions.php:106
-msgid "Uploaded to this Car"
-msgstr ""
+#: functions.php:106 functions.php:115
+msgid "Brand"
+msgstr "Бренд"
 
 #: functions.php:107
-msgid "Filter Cars list"
+msgid "Search Brands"
 msgstr ""
 
 #: functions.php:108
+msgid "All Brands"
+msgstr "Все Бренды"
+
+#: functions.php:109
+msgid "Parent Brand"
+msgstr ""
+
+#: functions.php:110
+msgid "Parent Brand:"
+msgstr ""
+
+#: functions.php:111
+msgid "Edit Brand"
+msgstr ""
+
+#: functions.php:112
+msgid "Update Brand"
+msgstr ""
+
+#: functions.php:113
+msgid "Add New Brand"
+msgstr "Добавить новый бренд"
+
+#: functions.php:114
+msgid "New Brand Name"
+msgstr ""
+
+#: functions.php:129
+msgid "Manufactures"
+msgstr "Производства"
+
+#: functions.php:130 functions.php:139
+msgid "Manufacture"
+msgstr "Производство"
+
+#: functions.php:131
+msgid "Search Manufactures"
+msgstr ""
+
+#: functions.php:132
+msgid "All Manufactures"
+msgstr ""
+
+#: functions.php:133
+msgid "Parent Manufacture"
+msgstr ""
+
+#: functions.php:134
+msgid "Parent Manufacture:"
+msgstr ""
+
+#: functions.php:135
+msgid "Edit Manufacture"
+msgstr ""
+
+#: functions.php:136
+msgid "Update Manufacture"
+msgstr ""
+
+#: functions.php:137
+msgid "Add New Manufacture"
+msgstr "Добавить новое производство"
+
+#: functions.php:138
+msgid "New Manufacture Name"
+msgstr ""
+
+#: functions.php:151 functions.php:154 functions.php:156
+msgid "Car"
+msgstr "Автомобиль"
+
+#: functions.php:153 functions.php:155
+msgid "Cars"
+msgstr "Автомобили"
+
+#: functions.php:157
+msgid "Add New"
+msgstr ""
+
+#: functions.php:158
+msgid "Add New Car"
+msgstr "Добавить новый автомобиль"
+
+#: functions.php:159
+msgid "New Car"
+msgstr "Новый автомобиль"
+
+#: functions.php:160
+msgid "Edit Car"
+msgstr ""
+
+#: functions.php:161
+msgid "View Car"
+msgstr ""
+
+#: functions.php:162
+msgid "All Cars"
+msgstr "Все автомобили"
+
+#: functions.php:163
+msgid "Search Cars"
+msgstr ""
+
+#: functions.php:164
+msgid "Parent Cars:"
+msgstr ""
+
+#: functions.php:165
+msgid "No Cars found."
+msgstr ""
+
+#: functions.php:166
+msgid "No Cars found in Trash."
+msgstr ""
+
+#: functions.php:167
+msgid "Car Cover Image"
+msgstr ""
+
+#: functions.php:168
+msgid "Set cover image"
+msgstr ""
+
+#: functions.php:169
+msgid "Remove cover image"
+msgstr ""
+
+#: functions.php:170
+msgid "Use as cover image"
+msgstr ""
+
+#: functions.php:171
+msgid "Car archives"
+msgstr ""
+
+#: functions.php:172
+msgid "Insert into Car"
+msgstr ""
+
+#: functions.php:173
+msgid "Uploaded to this Car"
+msgstr ""
+
+#: functions.php:174
+msgid "Filter Cars list"
+msgstr ""
+
+#: functions.php:175
 msgid "Cars list navigation"
 msgstr ""
 
-#: functions.php:109
+#: functions.php:176
 msgid "Cars list"
 msgstr ""
 
-#: functions.php:238
+#: functions.php:318
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:240
+#: functions.php:320
 msgid "Add widgets here."
 msgstr ""
 
@@ -186,23 +266,23 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
+#: partials/content-car.php:8 partials/content.php:8
+msgid "Read more"
+msgstr "Подробнее"
+
 #: partials/content-none.php:1
 msgid "No posts"
 msgstr ""
-
-#: partials/content.php:7
-msgid "Read more"
-msgstr "Подробнее"
 
 #: search.php:22
 #, php-format
 msgid "Search Results for: %s"
 msgstr ""
 
-#: single.php:23
+#: single-cars.php:16 single.php:24
 msgid "Previous:"
 msgstr "Предыдущая:"
 
-#: single.php:24
+#: single-cars.php:17 single.php:25
 msgid "Next:"
 msgstr "Следующая:"

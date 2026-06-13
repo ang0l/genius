@@ -78,7 +78,7 @@ function geniuscourse_theme_init()
 	]);
 
 	/**
-	 * Применение форматов к пост тайпу
+	 * Применение форматов к Пост Тайпу
 	 */
 	add_post_type_support('Car', 'post-formats');
 }
@@ -99,9 +99,58 @@ add_filter('get_search_form', 'geniuscourse_custom_search');
 
 function geniuscourse_register_post_type()
 {
+	$args = [
+		'hierarchical' => false, /// Древовидная структура. У меня термы по бренду не поддерживают древовидньсть, поэтому false.
+		'labels' => [ /// Все необходимое для перевода.
+			'name'              => esc_html_x('Brands', 'taxonomy general name', 'geniuscourse'),
+			'singular_name'     => esc_html_x('Brand', 'taxonomy singular name', 'geniuscourse'),
+			'search_items'      => esc_html__('Search Brands', 'geniuscourse'),
+			'all_items'         => esc_html__('All Brands', 'geniuscourse'),
+			'parent_item'       => esc_html__('Parent Brand', 'geniuscourse'),
+			'parent_item_colon' => esc_html__('Parent Brand:', 'geniuscourse'),
+			'edit_item'         => esc_html__('Edit Brand', 'geniuscourse'),
+			'update_item'       => esc_html__('Update Brand', 'geniuscourse'),
+			'add_new_item'      => esc_html__('Add New Brand', 'geniuscourse'),
+			'new_item_name'     => esc_html__('New Brand Name', 'geniuscourse'),
+			'menu_name'         => esc_html__('Brand', 'geniuscourse'),
+		],
+		'show_ui' => true, /// Включение интерфейса Таксономи
+		'rewrite' => ['slug' => 'brands'], /// слаг для Таксономи
+		'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=brands
+		'show_in_rest' => true, /// Включение редактора Gutenberg
+		'show_admin_column' => true, /// Включение колонки в список всех Термов
+	];
+
+	register_taxonomy('brend', ['car'], $args);
+	unset($args);
 
 	$args = [
-		'label' => esc_html__('Car', 'geniuscourse'), /// Название пост тайпа
+		'hierarchical' => true, /// Древовидная структура.
+		'labels' => [ /// Все необходимое для перевода.
+			'name'              => esc_html_x('Manufactures', 'taxonomy general name', 'geniuscourse'),
+			'singular_name'     => esc_html_x('Manufacture', 'taxonomy singular name', 'geniuscourse'),
+			'search_items'      => esc_html__('Search Manufactures', 'geniuscourse'),
+			'all_items'         => esc_html__('All Manufactures', 'geniuscourse'),
+			'parent_item'       => esc_html__('Parent Manufacture', 'geniuscourse'),
+			'parent_item_colon' => esc_html__('Parent Manufacture:', 'geniuscourse'),
+			'edit_item'         => esc_html__('Edit Manufacture', 'geniuscourse'),
+			'update_item'       => esc_html__('Update Manufacture', 'geniuscourse'),
+			'add_new_item'      => esc_html__('Add New Manufacture', 'geniuscourse'),
+			'new_item_name'     => esc_html__('New Manufacture Name', 'geniuscourse'),
+			'menu_name'         => esc_html__('Manufacture', 'geniuscourse'),
+		],
+		'show_ui' => true, /// Включение интерфейса Таксономи
+		'rewrite' => ['slug' => 'manufactures'], /// слаг для Таксономи
+		'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=manufactures
+		'show_in_rest' => true, /// Включение редактора Gutenberg
+		'show_admin_column' => true, /// Включение колонки в список всех Термов
+	];
+
+	register_taxonomy('manufacture', ['car'], $args);
+	unset($args);
+
+	$args = [
+		'label' => esc_html__('Car', 'geniuscourse'), /// Название Пост Тайпа
 		'labels' => [ /// Название элементов дизайна (?)
 			'name'                  => esc_html_x('Cars', 'Post type general name', 'geniuscourse'),
 			'singular_name'         => esc_html_x('Car', 'Post type singular name', 'geniuscourse'),
@@ -129,17 +178,17 @@ function geniuscourse_register_post_type()
 			'items_list'            => esc_html_x('Cars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'geniuscourse'),
 
 		],
-		'supports' => ['author', 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'post-formats',], /// Блоки, которые должны присутствовать в пост тайпе
-		'public' => true, /// доступ к пост тайпу из фронт-части сайта
+		'supports' => ['author', 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'post-formats',], /// Блоки, которые должны присутствовать в Пост Тайпе
+		'public' => true, /// доступ к Пост Тайпу из фронт-части сайта
 		'publicly_queryable' => true, /// доступ из фронта при обращении по ссылке
-		'show_ui' => true, /// Включение интерфейса пост тайпа
-		'show_in_menu' => true, /// ссылка в навигации Админки на пост тайп
+		'show_ui' => true, /// Включение интерфейса Пост Тайпа
+		'show_in_menu' => true, /// ссылка в навигации Админки на Пост Тайп
 		'has_archive' => true,
-		'show_in_admin_bar' => false, /// Включение/отсключение меню пост тайпа в админском меню (сверху)
-		'menu_position' => 100, /// Позиция размещения пост тайпа в навигации Админки
+		'show_in_admin_bar' => false, /// Включение/отсключение меню Пост Тайпа в админском меню (сверху)
+		'menu_position' => 100, /// Позиция размещения Пост Тайпа в навигации Админки
 		'menu_icon' => 'dashicons-car', /// иконка. стиль иконки выбирается по ссылке ниже
-		'rewrite' => ['slug' => 'cars'],
-		'show_in_rest' => true,
+		'rewrite' => ['slug' => 'cars'], /// слаг для Пост Тайпа
+		'show_in_rest' => true, /// Включение редактора Gutenberg
 	];
 
 	register_post_type('car', $args);
