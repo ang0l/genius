@@ -9,18 +9,50 @@ get_header();
 ?>
 
 <div>
-    <?php if (have_posts()) : ?>
-        <?php while (have_posts()): ?>
-            <?php the_post() ?>
-            This is file - temlate-homepage.php
+    <?php
+    $args = [
+        'post_type' => 'car', /// Название Пост Тайпа
+        'posts_per_page' => -1, /// Сколько машин загружать на страницу. Если установить '-1', то будут згружаться все машины.
+
+    ];
+    $cars = new WP_Query($args)
+    ?>
+    <?php if ($cars->have_posts()) : ?>
+        <?php while ($cars->have_posts()): ?>
+            <?php $cars->the_post() ?>
             <?php get_template_part('partials/content') ?>
             <br>
         <?php endwhile ?>
     <?php else : ?>
         <?php get_template_part('partials/content', 'none') ?>
     <?php endif ?>
+    <?php wp_reset_postdata() /* Снимаю полномочия со своего кастомного query и передаю управление глобальным query */ ?>
+
+    <hr> <?php /* Разделяю блок машин от блока постов */ ?>
+
+    <?php
+    unset($args);
+    $args = [
+        'post_type' => 'post', /// Название Пост Тайпа. В WordPress Пост тайп постов называется post
+        'posts_per_page' => -1, /// Сколько постов загружать на страницу.
+        'author' => 1, /// Вывод постов конкретного автора по ID (1 - ID Админа)
+
+    ];
+    $blogpost = new WP_Query($args)
+    ?>
+    <?php if ($blogpost->have_posts()) : ?>
+        <?php while ($blogpost->have_posts()): ?>
+            <?php $blogpost->the_post() ?>
+            <?php get_template_part('partials/content') ?>
+            <br>
+        <?php endwhile ?>
+    <?php else : ?>
+        <?php get_template_part('partials/content', 'none') ?>
+    <?php endif ?>
+    <?php wp_reset_postdata() /* Снимаю полномочия со своего кастомного query и передаю управление глобальным query */ ?>
+
 </div>
 
 <?php
-get_sidebar('car');
+// get_sidebar('car');
 get_footer();

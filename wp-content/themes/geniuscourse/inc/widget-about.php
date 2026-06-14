@@ -55,6 +55,30 @@ class Geniuscourse_About_Widget extends WP_Widget
 			echo wp_kses_post($text);
 		}
 
+?>
+		<hr>
+		<?php
+		/// Вставляю блок постов созданный в template-homepage.php
+		$args = [
+			'post_type' => 'post', /// Название Пост Тайпа. В WordPress Пост тайп постов называется post
+			'posts_per_page' => -1, /// Сколько постов загружать на страницу.
+
+		];
+		$blogpost = new WP_Query($args)
+		?>
+		<?php if ($blogpost->have_posts()) : ?>
+			<?php while ($blogpost->have_posts()): ?>
+				<?php $blogpost->the_post() ?>
+				<?php get_template_part('partials/content') ?>
+				<br>
+			<?php endwhile ?>
+		<?php else : ?>
+			<?php get_template_part('partials/content', 'none') ?>
+		<?php endif ?>
+		<?php wp_reset_postdata() /* Снимаю полномочия со своего кастомного query и передаю управление глобальным query */ ?>
+
+	<?php
+
 		echo $after_widget;
 	}
 
@@ -78,7 +102,7 @@ class Geniuscourse_About_Widget extends WP_Widget
 		}
 
 		/// Далее HTML-код, который я вынес бы в отдельный файл, ну да ладно
-?>
+	?>
 
 		<div>
 			<label for="<?= $this->get_field_id('title') ?>">

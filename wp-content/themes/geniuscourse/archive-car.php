@@ -33,5 +33,5 @@ get_header();
 
 
 <?php
-// get_sidebar();
+get_sidebar('car');
 get_footer();
