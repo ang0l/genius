@@ -11,6 +11,8 @@
 get_header();
 ?>
 
+<br>Это файл single.php<br>
+
 <main id="primary" class="site-main">
 
 	<?php
@@ -18,6 +20,9 @@ get_header();
 		the_post();
 
 		get_template_part('partials/content', get_post_type());
+
+		// previous_post_link('%link', __('Prev', 'geniuscourse'))
+		// next_post_link('%link', __('Next', 'geniuscourse'))
 
 		the_post_navigation(
 			array(

@@ -11,6 +11,8 @@
 get_header();
 ?>
 
+<br>Это файл archive.php<br>
+
 <div>
 	<header class="page-header">
 		<?php

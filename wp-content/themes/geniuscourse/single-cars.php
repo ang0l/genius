@@ -3,7 +3,7 @@
 get_header();
 ?>
 
-My custom Template for Single-Car
+<br>Это файл single-car.php<br>
 
 <?php
 while (have_posts()) :

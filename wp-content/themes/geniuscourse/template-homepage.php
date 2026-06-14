@@ -8,6 +8,8 @@
 get_header();
 ?>
 
+<br>Это файл template-homepage.php<br>
+
 <div>
     <?php
     $args = [

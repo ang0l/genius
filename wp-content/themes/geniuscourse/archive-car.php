@@ -11,8 +11,9 @@
 get_header();
 ?>
 
+<br>Это файл archive-car.php<br>
+
 <div>
-    Template for Castom post type Car
     <header class="page-header">
         <?php
         the_archive_title('<h1 class="page-title">', '</h1>');
@@ -24,7 +25,11 @@ get_header();
         <?php while (have_posts()): ?>
             <?php the_post() ?>
             <?php get_template_part('partials/content') ?>
-            <br>
+
+            <div class="pagination">
+                <?= paginate_links() ?>
+            </div>
+
         <?php endwhile ?>
     <?php else : ?>
         <?php get_template_part('partials/content', 'none') ?>
@@ -33,5 +38,5 @@ get_header();
 
 
 <?php
-get_sidebar('car');
+// get_sidebar('car');
 get_footer();
