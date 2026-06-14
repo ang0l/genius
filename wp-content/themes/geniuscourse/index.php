@@ -29,5 +29,5 @@ get_header();
 </div>
 
 <?php
-// get_sidebar();
+get_sidebar('car');
 get_footer();

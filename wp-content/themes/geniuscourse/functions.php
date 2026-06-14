@@ -11,6 +11,41 @@
 /// Отсюда буду писать свой код
 
 /**
+ * Регистрация области виджетов.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function geniuscourse_widgets_init()
+{
+	register_sidebar(
+		array(
+			'name'          => esc_html__('Sidebar', 'geniuscourse'),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__('Add widgets here.', 'geniuscourse'),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__('Car Pages Sidebar', 'geniuscourse'), /// Имя сайдбара
+			'id'            => 'carsidebar', /// ID сайдбара. Должен быть уникальным
+			'description'   => esc_html__('Appear as a Sidebar Pages.', 'geniuscourse'), /// Описание сайдбара
+			'before_widget' => '<section id="%1$s" class="widget %2$s">', /// Вывод HTML-тега до виджета
+			'after_widget'  => '</section>', /// Вывод HTML-тега после виджета
+			'before_title'  => '<h2 class="widget-title">', /// Открытие заголовка виджета
+			'after_title'   => '</h2>', /// Закрытие заголовка виджета
+		)
+	);
+
+	register_widget('geniuscourse_about_widget');
+}
+add_action('widgets_init', 'geniuscourse_widgets_init');
+
+/**
  * Подключение стилей и скриптов
  */
 function geinuscourse_enqueue_scripts()
@@ -204,6 +239,10 @@ function geniuscourse_rewrite_rules()
 	flush_rewrite_rules();
 }
 
+/**
+ * Регистрация персонального виджета.
+ */
+require get_template_directory() . '/inc/widget-about.php';
 
 
 
@@ -311,26 +350,6 @@ function geniuscourse_content_width()
 }
 add_action('after_setup_theme', 'geniuscourse_content_width', 0);
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function geniuscourse_widgets_init()
-{
-	register_sidebar(
-		array(
-			'name'          => esc_html__('Sidebar', 'geniuscourse'),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__('Add widgets here.', 'geniuscourse'),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-}
-add_action('widgets_init', 'geniuscourse_widgets_init');
 
 /**
  * Implement the Custom Header feature.
