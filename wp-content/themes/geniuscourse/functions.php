@@ -266,9 +266,14 @@ function geniuscourse_rewrite_rules()
 }
 
 /**
- * Регистрация персонального виджета.
+ * Подключение персонального виджета.
  */
 require get_template_directory() . '/inc/widget-about.php';
+
+/**
+ * Подключение мета-боксов.
+ */
+require get_template_directory() . '/inc/metaboxes.php';
 
 
 
