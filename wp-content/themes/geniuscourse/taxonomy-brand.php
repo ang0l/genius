@@ -18,7 +18,7 @@ echo $term->name;
 
 /// Далее беру HTML-код из index.php
 ?>
-
+<br>Это файл taxonomy-brand.php<br>
 <div>
     <?php if (have_posts()) : ?>
         <?php while (have_posts()): ?>

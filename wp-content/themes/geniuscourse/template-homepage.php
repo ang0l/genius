@@ -29,7 +29,7 @@ get_header();
     <?php if ($cars->have_posts()) : ?>
         <?php while ($cars->have_posts()): ?>
             <?php $cars->the_post() ?>
-            <?php get_template_part('partials/content') ?>
+            <?php get_template_part('partials/content', 'car') ?>
             <br>
         <?php endwhile ?>
 

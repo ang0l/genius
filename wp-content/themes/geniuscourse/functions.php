@@ -126,6 +126,8 @@ function geniuscourse_theme_init()
 	 */
 	add_theme_support('post-thumbnails');
 
+	add_image_size('car-cover', 240, 188);
+
 	/**
 	 * Поддержка пост-формата
 	 */

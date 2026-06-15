@@ -37,7 +37,7 @@ get_header();
 			<?php $cars->the_post() ?>
 			<?php /* Angol > */ ?>
 
-			<?php get_template_part('partials/content') ?>
+			<?php get_template_part('partials/content', 'car') ?>
 
 			<div class="pagination">
 
