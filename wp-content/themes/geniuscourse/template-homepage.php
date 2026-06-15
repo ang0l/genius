@@ -12,9 +12,16 @@ get_header();
 
 <div>
     <?php
+    /// < Angol. Определяю текущую страницу. Для статических страниц эта переменная запроса называется page
+    $paged = get_query_var('page') ? get_query_var('page') : 1;
+    /// Angol >
+
     $args = [
         'post_type' => 'car', /// Название Пост Тайпа
-        'posts_per_page' => -1, /// Сколько машин загружать на страницу. Если установить '-1', то будут згружаться все машины.
+        'posts_per_page' => 2, /// Сколько машин загружать на страницу. Если установить '-1', то будут згружаться все машины.
+
+        /// < Angol. Добавляю параметр текущей страницы
+        'paged' => $paged,
 
     ];
     $cars = new WP_Query($args)
@@ -25,6 +32,11 @@ get_header();
             <?php get_template_part('partials/content') ?>
             <br>
         <?php endwhile ?>
+
+        <?php /* < Angol. Подключаю Пагинацию */ ?>
+        <?php geinuscourse_paginate($cars) ?>
+        <?php /* Angol > */ ?>
+
     <?php else : ?>
         <?php get_template_part('partials/content', 'none') ?>
     <?php endif ?>

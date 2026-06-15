@@ -15,6 +15,30 @@
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
+
+function geinuscourse_paginate($query)
+{
+	$big = 999999999; // Нереально большое число
+
+	/// < Angol. Определяю на каком типе страницы нахожусь (сингл или архив)
+	$paged = '';
+	if (is_singular()) {
+		$paged = get_query_var('page');
+	} else {
+		$paged = get_query_var('paged');
+	}
+	/// Angol >
+
+	echo paginate_links(
+		array(
+			'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+			'format' => '?paged=%#%',
+			'current' => max(1, $paged),
+			'total' => $query->max_num_pages
+		)
+	);
+}
+
 function geniuscourse_widgets_init()
 {
 	register_sidebar(
