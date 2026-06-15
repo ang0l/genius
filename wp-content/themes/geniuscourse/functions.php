@@ -57,7 +57,7 @@ function geniuscourse_widgets_init()
 		array(
 			'name'          => esc_html__('Car Pages Sidebar', 'geniuscourse'), /// Имя сайдбара
 			'id'            => 'carsidebar', /// ID сайдбара. Должен быть уникальным
-			'description'   => esc_html__('Appear as a Sidebar Pages.', 'geniuscourse'), /// Описание сайдбара
+			'description'   => esc_html__('Appear as a Sidebar on Car Pages.', 'geniuscourse'), /// Описание сайдбара
 			'before_widget' => '<section id="%1$s" class="widget %2$s">', /// Вывод HTML-тега до виджета
 			'after_widget'  => '</section>', /// Вывод HTML-тега после виджета
 			'before_title'  => '<h2 class="widget-title">', /// Открытие заголовка виджета
