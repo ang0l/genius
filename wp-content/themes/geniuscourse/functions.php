@@ -16,6 +16,31 @@
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 
+/**
+ * Подключение персонального виджета.
+ */
+require get_template_directory() . '/inc/widget-about.php';
+
+/**
+ * Подключение мета-боксов.
+ */
+require get_template_directory() . '/inc/metaboxes.php';
+
+/**
+ * Подключение класса TGM_Plugin_Activation.
+ */
+require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
+
+/**
+ * Подключение файла _acf.php_ (плагин Advanced Custom Fields).
+ */
+require_once get_template_directory() . '/inc/acf.php';
+
+/**
+ * Подключение файла redux-options.php_ (плагин Redux).
+ */
+require_once get_template_directory() . '/inc/redux-options.php';
+
 function geinuscourse_paginate($query)
 {
 	$big = 999999999; // Нереально большое число
@@ -88,62 +113,6 @@ function geinuscourse_enqueue_scripts()
 	}
 }
 add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
-
-/**
- * Регистрация меню
- */
-function geniuscourse_theme_init()
-{
-
-	register_nav_menus([
-		'header_nav' => esc_html__('Header navigation', 'geniuscourse'),
-		'footer_nav' => esc_html__('Footer navigation', 'geniuscourse'),
-	]);
-
-	/**
-	 * Включает по поддержку HTML5 для форм, комментариев и пр.
-	 */
-	add_theme_support(
-		'html5',
-		array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		)
-	);
-
-	/**
-	 * Поддержка мультиязычности
-	 */
-	load_theme_textdomain('geniuscourse', get_template_directory() . '/languages');
-
-	/**
-	 * Поддержка thumbnails
-	 */
-	add_theme_support('post-thumbnails');
-
-	add_image_size('car-cover', 240, 188);
-
-	/**
-	 * Поддержка пост-формата
-	 */
-	add_theme_support('post-formats', [
-		'video',
-		'image',
-		'quote',
-		'gallery',
-	]);
-
-	/**
-	 * Применение форматов к Пост Тайпу
-	 */
-	add_post_type_support('Car', 'post-formats');
-}
-add_action('after_setup_theme', 'geniuscourse_theme_init', 0);
 
 function geniuscourse_custom_search()
 {
@@ -259,6 +228,62 @@ function geniuscourse_register_post_type()
 }
 add_action('init', 'geniuscourse_register_post_type');
 
+/**
+ * Регистрация меню
+ */
+function geniuscourse_theme_init()
+{
+
+	register_nav_menus([
+		'header_nav' => esc_html__('Header navigation', 'geniuscourse'),
+		'footer_nav' => esc_html__('Footer navigation', 'geniuscourse'),
+	]);
+
+	/**
+	 * Включает по поддержку HTML5 для форм, комментариев и пр.
+	 */
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		)
+	);
+
+	/**
+	 * Поддержка мультиязычности
+	 */
+	load_theme_textdomain('geniuscourse', get_template_directory() . '/languages');
+
+	/**
+	 * Поддержка thumbnails
+	 */
+	add_theme_support('post-thumbnails');
+
+	add_image_size('car-cover', 240, 188);
+
+	/**
+	 * Поддержка пост-формата
+	 */
+	add_theme_support('post-formats', [
+		'video',
+		'image',
+		'quote',
+		'gallery',
+	]);
+
+	/**
+	 * Применение форматов к Пост Тайпу
+	 */
+	add_post_type_support('Car', 'post-formats');
+}
+add_action('after_setup_theme', 'geniuscourse_theme_init', 0);
+
 function geniuscourse_rewrite_rules()
 {
 	geniuscourse_register_post_type();
@@ -315,26 +340,6 @@ function geniuscourse_register_required_plugins()
 	tgmpa($plugins, $config);
 }
 
-/**
- * Подключение персонального виджета.
- */
-require get_template_directory() . '/inc/widget-about.php';
-
-/**
- * Подключение мета-боксов.
- */
-require get_template_directory() . '/inc/metaboxes.php';
-
-/**
- * Подключение класса TGM_Plugin_Activation.
- */
-require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
-
-/**
- * Подключение файла _acf.php_ (плагин Advanced Custom Fields).
- */
-require_once get_template_directory() . '/inc/acf.php';
-
 
 
 
@@ -384,15 +389,6 @@ function geniuscourse_setup()
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
 	add_theme_support('post-thumbnails');
-
-	/// < Angol. Удалил локацию меню Primary содзанную в болванке по умолчанию
-	// // This theme uses wp_nav_menu() in one location.
-	// register_nav_menus(
-	// 	array(
-	// 		'menu-1' => esc_html__('Primary', 'geniuscourse'),
-	// 	)
-	// );
-
 
 	// Set up the WordPress core custom background feature.
 	add_theme_support(
