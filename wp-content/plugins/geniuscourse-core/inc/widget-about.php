@@ -137,3 +137,9 @@ class Geniuscourse_About_Widget extends WP_Widget
 		return $instance;
 	}
 }
+
+function geniuscourse_register_about_widget()
+{
+	register_widget('geniuscourse_about_widget');
+}
+add_action('widgets_init', 'geniuscourse_register_about_widget');

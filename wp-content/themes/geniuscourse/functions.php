@@ -17,24 +17,9 @@
  */
 
 /**
- * Подключение персонального виджета.
- */
-require get_template_directory() . '/inc/widget-about.php';
-
-/**
- * Подключение мета-боксов.
- */
-require get_template_directory() . '/inc/metaboxes.php';
-
-/**
  * Подключение класса TGM_Plugin_Activation.
  */
 require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
-
-/**
- * Подключение файла _acf.php_ (плагин Advanced Custom Fields).
- */
-require_once get_template_directory() . '/inc/acf.php';
 
 /**
  * Подключение файла redux-options.php_ (плагин Redux).
@@ -89,8 +74,6 @@ function geniuscourse_widgets_init()
 			'after_title'   => '</h2>', /// Закрытие заголовка виджета
 		)
 	);
-
-	register_widget('geniuscourse_about_widget');
 }
 add_action('widgets_init', 'geniuscourse_widgets_init');
 
@@ -126,107 +109,6 @@ function geniuscourse_custom_search()
 	return $form;
 }
 add_filter('get_search_form', 'geniuscourse_custom_search');
-
-function geniuscourse_register_post_type()
-{
-	if (!taxonomy_exists('brand')) { /// если не существует Таксономи brand
-		$args = [
-			'hierarchical' => false, /// Древовидная структура. У меня термы по бренду не поддерживают древовидньсть, поэтому false.
-			'labels' => [ /// Все необходимое для перевода.
-				'name'              => esc_html_x('Brands', 'taxonomy general name', 'geniuscourse'),
-				'singular_name'     => esc_html_x('Brand', 'taxonomy singular name', 'geniuscourse'),
-				'search_items'      => esc_html__('Search Brands', 'geniuscourse'),
-				'all_items'         => esc_html__('All Brands', 'geniuscourse'),
-				'parent_item'       => esc_html__('Parent Brand', 'geniuscourse'),
-				'parent_item_colon' => esc_html__('Parent Brand:', 'geniuscourse'),
-				'edit_item'         => esc_html__('Edit Brand', 'geniuscourse'),
-				'update_item'       => esc_html__('Update Brand', 'geniuscourse'),
-				'add_new_item'      => esc_html__('Add New Brand', 'geniuscourse'),
-				'new_item_name'     => esc_html__('New Brand Name', 'geniuscourse'),
-				'menu_name'         => esc_html__('Brand', 'geniuscourse'),
-			],
-			'show_ui' => true, /// Включение интерфейса Таксономи
-			'rewrite' => ['slug' => 'brands'], /// слаг для Таксономи
-			'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=brands
-			'show_in_rest' => true, /// Включение редактора Gutenberg
-			'show_admin_column' => true, /// Включение колонки в список всех Термов
-		];
-
-		register_taxonomy('brand', ['car'], $args);
-	}
-
-	unset($args);
-
-	$args = [
-		'hierarchical' => true, /// Древовидная структура.
-		'labels' => [ /// Все необходимое для перевода.
-			'name'              => esc_html_x('Manufactures', 'taxonomy general name', 'geniuscourse'),
-			'singular_name'     => esc_html_x('Manufacture', 'taxonomy singular name', 'geniuscourse'),
-			'search_items'      => esc_html__('Search Manufactures', 'geniuscourse'),
-			'all_items'         => esc_html__('All Manufactures', 'geniuscourse'),
-			'parent_item'       => esc_html__('Parent Manufacture', 'geniuscourse'),
-			'parent_item_colon' => esc_html__('Parent Manufacture:', 'geniuscourse'),
-			'edit_item'         => esc_html__('Edit Manufacture', 'geniuscourse'),
-			'update_item'       => esc_html__('Update Manufacture', 'geniuscourse'),
-			'add_new_item'      => esc_html__('Add New Manufacture', 'geniuscourse'),
-			'new_item_name'     => esc_html__('New Manufacture Name', 'geniuscourse'),
-			'menu_name'         => esc_html__('Manufacture', 'geniuscourse'),
-		],
-		'show_ui' => true, /// Включение интерфейса Таксономи
-		'rewrite' => ['slug' => 'manufactures'], /// слаг для Таксономи
-		'query_var' => true, /// загружаем Таксономи по переменной запроса: ...?query_var=manufactures
-		'show_in_rest' => true, /// Включение редактора Gutenberg
-		'show_admin_column' => true, /// Включение колонки в список всех Термов
-	];
-
-	register_taxonomy('manufacture', ['car'], $args);
-	unset($args);
-
-	$args = [
-		'label' => esc_html__('Car', 'geniuscourse'), /// Название Пост Тайпа
-		'labels' => [ /// Название элементов дизайна (?)
-			'name'                  => esc_html_x('Cars', 'Post type general name', 'geniuscourse'),
-			'singular_name'         => esc_html_x('Car', 'Post type singular name', 'geniuscourse'),
-			'menu_name'             => esc_html_x('Cars', 'Admin Menu text', 'geniuscourse'),
-			'name_admin_bar'        => esc_html_x('Car', 'Add New on Toolbar', 'geniuscourse'),
-			'add_new'               => esc_html__('Add New', 'geniuscourse'),
-			'add_new_item'          => esc_html__('Add New Car', 'geniuscourse'),
-			'new_item'              => esc_html__('New Car', 'geniuscourse'),
-			'edit_item'             => esc_html__('Edit Car', 'geniuscourse'),
-			'view_item'             => esc_html__('View Car', 'geniuscourse'),
-			'all_items'             => esc_html__('All Cars', 'geniuscourse'),
-			'search_items'          => esc_html__('Search Cars', 'geniuscourse'),
-			'parent_item_colon'     => esc_html__('Parent Cars:', 'geniuscourse'),
-			'not_found'             => esc_html__('No Cars found.', 'geniuscourse'),
-			'not_found_in_trash'    => esc_html__('No Cars found in Trash.', 'geniuscourse'),
-			'featured_image'        => esc_html_x('Car Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'geniuscourse'),
-			'set_featured_image'    => esc_html_x('Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'geniuscourse'),
-			'remove_featured_image' => esc_html_x('Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'geniuscourse'),
-			'use_featured_image'    => esc_html_x('Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'geniuscourse'),
-			'archives'              => esc_html_x('Car archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'geniuscourse'),
-			'insert_into_item'      => esc_html_x('Insert into Car', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'geniuscourse'),
-			'uploaded_to_this_item' => esc_html_x('Uploaded to this Car', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'geniuscourse'),
-			'filter_items_list'     => esc_html_x('Filter Cars list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'geniuscourse'),
-			'items_list_navigation' => esc_html_x('Cars list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'geniuscourse'),
-			'items_list'            => esc_html_x('Cars list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'geniuscourse'),
-
-		],
-		'supports' => ['author', 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'post-formats',], /// Блоки, которые должны присутствовать в Пост Тайпе
-		'public' => true, /// доступ к Пост Тайпу из фронт-части сайта
-		'publicly_queryable' => true, /// доступ из фронта при обращении по ссылке
-		'show_ui' => true, /// Включение интерфейса Пост Тайпа
-		'show_in_menu' => true, /// ссылка в навигации Админки на Пост Тайп
-		'has_archive' => true,
-		'show_in_admin_bar' => false, /// Включение/отсключение меню Пост Тайпа в админском меню (сверху)
-		'menu_position' => 100, /// Позиция размещения Пост Тайпа в навигации Админки
-		'menu_icon' => 'dashicons-car', /// иконка. стиль иконки выбирается по ссылке ниже
-		'rewrite' => ['slug' => 'cars'], /// слаг для Пост Тайпа
-		'show_in_rest' => true, /// Включение редактора Gutenberg
-	];
-
-	register_post_type('car', $args);
-}
-add_action('init', 'geniuscourse_register_post_type');
 
 /**
  * Регистрация меню
@@ -281,6 +163,16 @@ function geniuscourse_theme_init()
 	 * Применение форматов к Пост Тайпу
 	 */
 	add_post_type_support('Car', 'post-formats');
+
+	/**
+	 * Добавление по умолчанию в посты и комментарии RSS-ссылки в заголовок.
+	 */
+	add_theme_support('automatic-feed-links');
+
+	/*
+	 * Добавление тега `<title>` в заголовок документа
+	 */
+	add_theme_support('title-tag');
 }
 add_action('after_setup_theme', 'geniuscourse_theme_init', 0);
 
@@ -340,93 +232,9 @@ function geniuscourse_register_required_plugins()
 	tgmpa($plugins, $config);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// ниже код болванки, я его со временем удалю
-
-
-if (! defined('_S_VERSION')) {
-	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.0.0');
-}
-
 /**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function geniuscourse_setup()
-{
-
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support('automatic-feed-links');
-
-	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
-	add_theme_support('title-tag');
-
-	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
-	add_theme_support('post-thumbnails');
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support(
-		'custom-background',
-		apply_filters(
-			'geniuscourse_custom_background_args',
-			array(
-				'default-color' => 'ffffff',
-				'default-image' => '',
-			)
-		)
-	);
-
-	// Add theme support for selective refresh for widgets.
-	add_theme_support('customize-selective-refresh-widgets');
-
-	/**
-	 * Add support for core custom logo.
-	 *
-	 * @link https://codex.wordpress.org/Theme_Logo
-	 */
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
-}
-add_action('after_setup_theme', 'geniuscourse_setup');
-
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
+ * Установите ширину содержимого в пикселях в зависимости от дизайна темы и таблицы стилей.
+ * Приоритет 0, чтобы сделать его доступным для обратных вызовов с более низким приоритетом.
  * @global int $content_width
  */
 function geniuscourse_content_width()
@@ -434,31 +242,3 @@ function geniuscourse_content_width()
 	$GLOBALS['content_width'] = apply_filters('geniuscourse_content_width', 640);
 }
 add_action('after_setup_theme', 'geniuscourse_content_width', 0);
-
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if (defined('JETPACK__VERSION')) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
