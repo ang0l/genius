@@ -24,12 +24,9 @@
 	<?php wp_body_open(); ?>
 	Закончился файл Header <br><br>
 
-	<?php
+	<button id="button_car">
+		Show All Cars
+	</button>
+	<div id="car_content" style="background: #e5e5e5; border: 1px solid #000;">
 
-	/// Вывожу глобальную переменную с названием, которое задано в переменной $opt_name
-	/// файла _/inc/redux-options.hph_
-	global $geniuscourse_options;
-
-	?>
-	<p><?= $geniuscourse_options['phone'] /* на странице подгружается номер телефона */ ?></p>
-	<p><?= $geniuscourse_options['logo']['url'] /* на странице подгружается url картинки */ ?></p>
+	</div>

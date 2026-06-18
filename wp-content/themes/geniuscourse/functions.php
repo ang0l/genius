@@ -84,11 +84,27 @@ function geinuscourse_enqueue_scripts()
 {
 	/// подключаю стили: параметры:
 	/// 1 - тема, 2 - путь к файлу стилей, 3 - дополнительные параметры, 4 - версия, 5 - медиа (для всех)
-	wp_enqueue_style('geniuscourse', get_template_directory_uri() . '/assets/css/general.css', [], '1.0.0.0', 'all');
+	wp_enqueue_style('geniuscourse-general', get_template_directory_uri() . '/assets/css/general.css', [], '1.0.0.0', 'all');
 
 	/// подключаю скрипты: параметры:
 	/// 1 - тема, 2 - путь к файлу скриптов, 3 - дополнительные параметры (необходимость подгрузить jquery), 4 - версия, 5 - место подключения: true - подвал, false - шапка.
-	wp_enqueue_script('geniuscourse', get_template_directory_uri() . '/assets/js/script.js', ['jquery'], '1.0.0.0', true);
+	wp_enqueue_script('geniuscourse-script', get_template_directory_uri() . '/assets/js/script.js', ['jquery'], '1.0.0.0', true);
+
+	/// Подключаю ajax
+	wp_enqueue_script('geniuscourse-ajax', get_template_directory_uri() . '/assets/js/ajax.js', ['jquery'], '1.0.0.0', true);
+	/// Локализация для Ajax
+	wp_localize_script(
+		'geniuscourse-ajax', /// Для кого привязывается локализация
+		'geniuscourse_ajax_script', /// ID локалайза
+		[ /// в массиве передаются значения переводов
+			'ajaxurl' => admin_url('admin-ajax.php'), /// Задается обработчик Ajax
+			'nonce' => wp_create_nonce('ajax-nonce'), /// Безопасность. Проверяется откуда пришел запрос.
+			/// Далее идет перевод
+			'string' => esc_html__('Hello', 'geniuscourse'),
+			'string_new' => esc_html__('Hello World', 'geniuscourse'),
+		]
+
+	);
 
 	/// поключаю ответы на комментарий. переношу готовый код снизу из функции geniuscourse_scripts(), которую тоже удалил
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -96,6 +112,44 @@ function geinuscourse_enqueue_scripts()
 	}
 }
 add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
+
+function geniuscourse_ajax_example()
+{
+
+	// /// Проверка Нонса
+	// if (!wp_verify_nonce($_REQUEST['nonce'], 'ajax-nonce')) {
+	// 	die;
+	// }
+	// echo 'Да блядь!';
+
+	/// Вывод переменных
+	if (isset($_REQUEST['string_one'])) {
+		echo $_REQUEST['string_one'];
+	}
+
+	echo '<br>';
+
+	if (isset($_REQUEST['string_two'])) {
+		echo $_REQUEST['string_two'];
+	}
+
+	/// Вывод цикла
+	$cars = new WP_Query(['post_type' => 'car', "post_per_page" => 10]);
+
+	if ($cars->have_posts()) {
+		while ($cars->have_posts()) {
+			$cars->the_post();
+			get_template_part('partials/content', 'car');
+		}
+	}
+	/// Снимаю полномочия со своего кастомного query и передаю управление глобальным query
+	wp_reset_postdata();
+
+	die;
+}
+
+add_action('wp_ajax_geniuscourse_ajax_example', 'geniuscourse_ajax_example');
+add_action('wp_ajax_nopriv_geniuscourse_ajax_example', 'geniuscourse_ajax_example');
 
 function geniuscourse_custom_search()
 {
