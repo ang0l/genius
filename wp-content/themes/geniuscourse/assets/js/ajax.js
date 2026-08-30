@@ -8,11 +8,11 @@ jQuery(document).ready(function ($) {
 			data: {
 				'action': 'geniuscourse_ajax_example',
 				'nonce': geniuscourse_ajax_script.nonce,
-				'string_one': geniuscourse_ajax_script.string,
+				'string_one': geniuscourse_ajax_script.string_box,
 				'string_two': geniuscourse_ajax_script.string_new
 			},
 			success: function (data) {
-				$('#car_content').append(data);
+				$('#car_content').html(data);
 			},
 			error: function (errorThrown) {
 				console.log(errorThrown);

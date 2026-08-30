@@ -100,7 +100,7 @@ function geinuscourse_enqueue_scripts()
 			'ajaxurl' => admin_url('admin-ajax.php'), /// Задается обработчик Ajax
 			'nonce' => wp_create_nonce('ajax-nonce'), /// Безопасность. Проверяется откуда пришел запрос.
 			/// Далее идет перевод
-			'string' => esc_html__('Hello', 'geniuscourse'),
+			'string_box' => esc_html__('Hello', 'geniuscourse'),
 			'string_new' => esc_html__('Hello World', 'geniuscourse'),
 		]
 
@@ -116,11 +116,10 @@ add_action('wp_enqueue_scripts', 'geinuscourse_enqueue_scripts');
 function geniuscourse_ajax_example()
 {
 
-	// /// Проверка Нонса
-	// if (!wp_verify_nonce($_REQUEST['nonce'], 'ajax-nonce')) {
-	// 	die;
-	// }
-	// echo 'Да блядь!';
+	/// Проверка Нонса
+	if (!wp_verify_nonce($_REQUEST['nonce'], 'ajax-nonce')) {
+		die;
+	}
 
 	/// Вывод переменных
 	if (isset($_REQUEST['string_one'])) {
@@ -134,7 +133,7 @@ function geniuscourse_ajax_example()
 	}
 
 	/// Вывод цикла
-	$cars = new WP_Query(['post_type' => 'car', "post_per_page" => 10]);
+	$cars = new WP_Query(['post_type' => 'car', "post_per_page" => -1]);
 
 	if ($cars->have_posts()) {
 		while ($cars->have_posts()) {
